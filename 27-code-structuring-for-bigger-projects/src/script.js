@@ -2,7 +2,6 @@ import "./style.css";
 import Experience from "./experience/Experience";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import * as dat from "lil-gui";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 const experience = new Experience(document.querySelector("canvas.webgl"));
