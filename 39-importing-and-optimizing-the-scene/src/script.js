@@ -54,7 +54,7 @@ gltfLoader.load("portal.glb", (gltf) => {
     if (m.name.startsWith("PoleLight")) {
       m.material = poleLightMaterial;
     } else if (m.name.startsWith("PortalLight")) {
-      m.material = poleLightMaterial;
+      m.material = portalLightMaterial;
     } else {
       m.material = bakedMaterial;
     }
