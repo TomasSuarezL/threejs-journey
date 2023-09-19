@@ -31,6 +31,8 @@ export const BlockSpinner = ({ position = [0, 0, 0] }) => {
   const [speed] = useState((Math.random() + 0.2) * (Math.random() > 0.5 ? 1 : -1));
 
   useFrame((state) => {
+    if (!obstacle.current) return;
+
     const time = state.clock.elapsedTime;
     const rotation = new Quaternion();
     rotation.setFromEuler(new Euler(0, time * speed, 0));
@@ -71,6 +73,8 @@ export const BlockLimbo = ({ position = [0, 0, 0] }) => {
   const [offset] = useState(Math.random() * Math.PI * 2);
 
   useFrame((state) => {
+    if (!obstacle.current) return;
+
     const time = state.clock.elapsedTime;
     obstacle.current.setNextKinematicTranslation({
       x: position[0],
@@ -113,6 +117,8 @@ export const BlockAxe = ({ position = [0, 0, 0] }) => {
   const [offset] = useState(Math.random() * Math.PI * 2);
 
   useFrame((state) => {
+    if (!obstacle.current) return;
+
     const time = state.clock.elapsedTime;
     obstacle.current.setNextKinematicTranslation({
       x: Math.sin(time + offset) * 1.25,
@@ -203,8 +209,8 @@ const Bounds = ({ length }) => {
         castShadow
       ></mesh>
       <CuboidCollider
-        args={[2, 0.3, length * 2]}
-        position={[0, 0, -length * 2 + 2]}
+        args={[2, 0.1, length * 2]}
+        position={[0, -0.1, -length * 2 + 2]}
         restitution={0.2}
         friction={1}
       />
