@@ -1,4 +1,4 @@
-import { useGLTF } from "@react-three/drei";
+import { Float, Text, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { CuboidCollider, RigidBody } from "@react-three/rapier";
 import { useMemo, useRef, useState } from "react";
@@ -14,6 +14,20 @@ const wallMaterial = new MeshStandardMaterial({ color: "slategray" });
 const BlockStart = ({ position = [0, 0, 0] }) => {
   return (
     <group position={position}>
+      <Float floatIntensity={0.25} rotationIntensity={0.25}>
+        <Text
+          font={"./bebas-neue-v9-latin-regular.woff"}
+          scale={0.4}
+          maxWidth={0.25}
+          textAlign="right"
+          lineHeight={0.75}
+          position={[0.75, 0.65, 0]}
+          rotation-y={-0.25}
+        >
+          Marble Race
+          <meshBasicMaterial toneMapped={false} />
+        </Text>
+      </Float>
       <mesh
         geometry={boxGeometry}
         material={floorMaterial}
@@ -171,6 +185,18 @@ const BlockEnd = ({ position = [0, 0, 0] }) => {
         position={[0, -0.1, 0]}
         scale={[4, 0.2, 4]}
       />
+      <Text
+        font={"./bebas-neue-v9-latin-regular.woff"}
+        scale={0.9}
+        maxWidth={0.25}
+        textAlign="right"
+        lineHeight={0.75}
+        position={[0, 1.25, 2]}
+        rotation-y={-0.25}
+      >
+        Finish
+        <meshBasicMaterial toneMapped={false} />
+      </Text>
       <RigidBody
         type="fixed"
         colliders="hull"
@@ -218,7 +244,7 @@ const Bounds = ({ length }) => {
   );
 };
 
-export const Level = ({ count = 5, types = [BlockSpinner, BlockLimbo, BlockAxe] }) => {
+export const Level = ({ count = 5, types = [BlockSpinner, BlockLimbo, BlockAxe], seed = 0 }) => {
   const blocks = useMemo(() => {
     const blocks = [];
     for (let i = 0; i < count; i++) {
@@ -226,7 +252,7 @@ export const Level = ({ count = 5, types = [BlockSpinner, BlockLimbo, BlockAxe] 
     }
 
     return blocks;
-  }, [count, types]);
+  }, [count, types, seed]);
 
   return (
     <>
@@ -234,7 +260,7 @@ export const Level = ({ count = 5, types = [BlockSpinner, BlockLimbo, BlockAxe] 
       {blocks.map((Block, idx) => {
         return <Block key={idx} position={[0, 0, -idx * 4 - 4]} />;
       })}
-      <BlockEnd position={[0, 0, -count * 4 - 4]} />
+      <BlockEnd position={[0, 0.1, -count * 4 - 4]} />
       <Bounds length={count + 2} />
     </>
   );
