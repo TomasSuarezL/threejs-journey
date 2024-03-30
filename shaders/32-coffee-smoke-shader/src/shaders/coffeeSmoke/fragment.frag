@@ -14,7 +14,11 @@ void main() {
   vec4 smoke = texture(uPerlinTexture, smokeUv);
   float smokeColor = smoke.r;
 
-  gl_FragColor = vec4(vec3(1.0), smokeColor);
+  smokeColor = smoothstep(0.4,1.0, smokeColor);
+
+  smokeColor = smokeColor * smoothstep(0.0, 0.1, vUv.x) * smoothstep(1.0, 0.9, vUv.x) * smoothstep(0.0, 0.1, vUv.y) * smoothstep(1.0, 0.4, vUv.y);
+
+  gl_FragColor = vec4(vec3(0.6), smokeColor);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
 }
