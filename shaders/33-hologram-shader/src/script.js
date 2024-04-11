@@ -105,9 +105,9 @@ torusKnot.position.x = 3;
 scene.add(torusKnot);
 
 // Sphere
-const sphere = new THREE.Mesh(new THREE.SphereGeometry(), material);
-sphere.position.x = -3;
-scene.add(sphere);
+const pyramid = new THREE.Mesh(new THREE.ConeGeometry(1, 1, 3, 1), material);
+pyramid.position.x = -3;
+scene.add(pyramid);
 
 // Suzanne
 let suzanne = null;
@@ -135,8 +135,8 @@ const tick = () => {
     suzanne.rotation.y = elapsedTime * 0.2;
   }
 
-  sphere.rotation.x = -elapsedTime * 0.1;
-  sphere.rotation.y = elapsedTime * 0.2;
+  pyramid.rotation.x = -elapsedTime * 0.1;
+  pyramid.rotation.y = elapsedTime * 0.2;
 
   torusKnot.rotation.x = -elapsedTime * 0.1;
   torusKnot.rotation.y = elapsedTime * 0.2;

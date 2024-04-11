@@ -11,7 +11,7 @@ void main() {
     normal *= -1.0;
 
   // Stripes
-  float stripes = mod((vPosition.y - uTime * 0.03) *20.0, 1.0);
+  float stripes = mod((vPosition.y - uTime * 0.03) *1.0, 1.0);
   stripes = pow(stripes, 3.0);
 
   vec3 viewDirection = normalize(vPosition - cameraPosition); 
